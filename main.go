@@ -13,10 +13,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/azr/phash"
 	"github.com/corona10/goimagehash"
 	"github.com/disintegration/imaging"
@@ -815,24 +811,6 @@ func single() *Ioc {
 	})
 
 	return ioc
-}
-
-func NewS3Client() *s3.S3 {
-	sess := session.Must(session.NewSession(&aws.Config{
-		DisableSSL:                aws.Bool(true),
-		Endpoint:                  aws.String("http://jssz-boss.bilibili.co"),
-		Region:                    aws.String("jssz-inner"),
-		DisableEndpointHostPrefix: aws.Bool(true),
-		DisableComputeChecksums:   aws.Bool(true),
-		S3ForcePathStyle:          aws.Bool(true),
-		S3Disable100Continue:      aws.Bool(true),
-		Credentials: credentials.NewStaticCredentials(
-			"aQApncTK25tBinxN",
-			"km6F2QtHFjkVde2kX7I9e8w38u6BCsvn",
-			"",
-		),
-	}))
-	return s3.New(sess)
 }
 
 func findDuplicate(nums []int) int {
